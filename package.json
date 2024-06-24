@@ -18,10 +18,10 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@wonse/eslint-config-next": "^1.0.3",
+    "@wonse/eslint-config-react": "^1.0.4",
     "postcss": "^8",
     "prettier": "^3.3.2",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  },
-  "packageManager": "yarn@4.3.1"
+  }
 }
