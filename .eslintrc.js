@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['@wonse/next'],
+  extends: ['@wonse/next', 'plugin:storybook/recommended'],
 };
