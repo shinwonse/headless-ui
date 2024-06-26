@@ -1,7 +1,3 @@
 module.exports = {
-  extends: [
-    '@wonse/next',
-    'plugin:storybook/recommended',
-    'plugin:vitest/recommended',
-  ],
+  extends: ['@wonse/eslint-config-next', 'plugin:storybook/recommended'],
 };

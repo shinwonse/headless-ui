@@ -1,5 +1,6 @@
-import { cn } from '@/utils';
 import { createContext, ReactNode, useContext, useState } from 'react';
+
+import { cn } from '@/utils';
 
 /**
  * Accordion.Root: 아코디언 컴포넌트의 루트 요소입니다.
@@ -35,12 +36,12 @@ const AccordionRoot = ({ children, className }: AccordionRootProps) => {
 };
 
 interface AccordionItemProps {
-  index: number;
   children: ReactNode;
   className?: string;
+  index: number;
 }
 
-const AccordionItem = ({ index, children, className }: AccordionItemProps) => {
+const AccordionItem = ({ children, className, index }: AccordionItemProps) => {
   const { openIndex } = useContext(AccordionContext);
   const isOpen = openIndex === index;
 
@@ -57,15 +58,15 @@ const AccordionHeader = ({ children, className }: AccordionHeaderProps) => {
 };
 
 interface AccordionTriggerProps {
-  index: number;
   children: ReactNode;
   className?: string;
+  index: number;
 }
 
 const AccordionTrigger = ({
-  index,
   children,
   className,
+  index,
 }: AccordionTriggerProps) => {
   const { toggleItem } = useContext(AccordionContext);
 
@@ -97,11 +98,11 @@ const Accordioncontent = ({
 };
 
 const Accordion = {
-  Root: AccordionRoot,
-  Item: AccordionItem,
-  Header: AccordionHeader,
-  Trigger: AccordionTrigger,
   Content: Accordioncontent,
+  Header: AccordionHeader,
+  Item: AccordionItem,
+  Root: AccordionRoot,
+  Trigger: AccordionTrigger,
 };
 
 export default Accordion;

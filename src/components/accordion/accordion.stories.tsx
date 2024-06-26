@@ -1,7 +1,8 @@
 import type { Meta } from '@storybook/react';
 
-import Accordion from './accordion';
 import { cn } from '@/utils';
+
+import Accordion from './accordion';
 
 export default {
   title: '아코디언',
