@@ -9,7 +9,7 @@ import { cn } from '@/utils';
  * Accordion.Trigger: 아코디언 트리거 컴포넌트입니다.
  * Accordion.Content: 아코디언 컨텐츠 컴포넌트입니다.
  */
-const AccordionContext = createContext<any>(null);
+export const AccordionContext = createContext<any>(null);
 
 interface AccordionRootProps {
   children: ReactNode;
@@ -45,7 +45,11 @@ const AccordionItem = ({ children, className, index }: AccordionItemProps) => {
   const { openIndex } = useContext(AccordionContext);
   const isOpen = openIndex === index;
 
-  return <li className={cn('', className)}>{children}</li>;
+  return (
+    <li className={cn('p-4 border-b', className)} data-open={isOpen}>
+      {children}
+    </li>
+  );
 };
 
 interface AccordionHeaderProps {
@@ -54,7 +58,7 @@ interface AccordionHeaderProps {
 }
 
 const AccordionHeader = ({ children, className }: AccordionHeaderProps) => {
-  return <h3 className={cn(className)}>{children}</h3>;
+  return <h3 className={cn('', className)}>{children}</h3>;
 };
 
 interface AccordionTriggerProps {
@@ -71,7 +75,10 @@ const AccordionTrigger = ({
   const { toggleItem } = useContext(AccordionContext);
 
   return (
-    <button className={cn(className)} onClick={() => toggleItem(index)}>
+    <button
+      className={cn('w-full text-start', className)}
+      onClick={() => toggleItem(index)}
+    >
       {children}
     </button>
   );
@@ -83,7 +90,7 @@ interface AccordionContentProps {
   index: number;
 }
 
-const Accordioncontent = ({
+const AccordionContent = ({
   children,
   className,
   index,
@@ -98,7 +105,7 @@ const Accordioncontent = ({
 };
 
 const Accordion = {
-  Content: Accordioncontent,
+  Content: AccordionContent,
   Header: AccordionHeader,
   Item: AccordionItem,
   Root: AccordionRoot,
