@@ -4,14 +4,14 @@ const measureLines = (element: HTMLElement, value: string) => {
   const canvasContext: CanvasRenderingContext2D = canvas.getContext('2d')!;
   const style = window.getComputedStyle(element);
   canvasContext.font = `${style.getPropertyValue('font-size')} ${style.getPropertyValue('font-family')}`;
-  const measuredLines = value.split('\n').reduce((r, c) => {
-    const res = Math.max(
-      Math.ceil(canvasContext.measureText(c).width / element!.offsetWidth),
-      1,
-    );
-    return r + res;
+
+  const lines = value.split('\n').reduce((totalLines, line) => {
+    const lineWidth = canvasContext.measureText(line).width;
+    const linesInLine = Math.ceil(lineWidth / element.offsetWidth);
+    return totalLines + linesInLine;
   }, 0);
-  return measuredLines;
+
+  return lines;
 };
 
 export default measureLines;
