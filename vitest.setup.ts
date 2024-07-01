@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom';
+import 'vitest-canvas-mock';
 
 import { afterAll, afterEach, vi } from 'vitest';
 
