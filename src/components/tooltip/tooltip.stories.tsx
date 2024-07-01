@@ -17,10 +17,10 @@ export const 기본 = () => {
   return (
     <Tooltip.Root>
       <Tooltip.Trigger>
-        <button>툴팁 트리거</button>
+        <button>마우스를 올려보세요</button>
       </Tooltip.Trigger>
       <Tooltip.Portal>
-        <Tooltip.Content>툴팁 컨텐츠</Tooltip.Content>
+        <Tooltip.Content>툴팁이 나타났어요</Tooltip.Content>
       </Tooltip.Portal>
     </Tooltip.Root>
   );

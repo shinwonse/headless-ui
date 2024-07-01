@@ -8,10 +8,13 @@ import {
   useContext,
   useState,
 } from 'react';
+import { createPortal } from 'react-dom';
 
 import { cn } from '@/utils';
 
 const TooltipContext = createContext<any>(null);
+
+export const useTooltip = () => useContext(TooltipContext);
 
 interface TooltipProviderProps {
   children: ReactNode;
@@ -42,8 +45,13 @@ const TooltipRoot = ({
   children,
   className,
   defaultOpen,
-  open,
 }: TooltipRootProps) => {
+  const { setTooltipData, tooltipData } = useTooltip();
+
+  if (defaultOpen && !tooltipData.isVisible) {
+    setTooltipData({ ...tooltipData, isVisible: true });
+  }
+
   return <div className={cn(className)}>{children}</div>;
 };
 
@@ -84,7 +92,7 @@ interface TooltipPortalProps {
 }
 
 const TooltipPortal = ({ children }: TooltipPortalProps) => {
-  return <>{children}</>;
+  return createPortal(children, document.body);
 };
 
 interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {}
@@ -96,16 +104,7 @@ const TooltipContent = ({ children, ...props }: TooltipContentProps) => {
 
   return (
     <div
-      style={{
-        backgroundColor: 'black',
-        borderRadius: '4px',
-        color: 'white',
-        left: tooltipData.position.left,
-        padding: '5px 10px',
-        position: 'absolute',
-        top: tooltipData.position.top + 20,
-        zIndex: 1000,
-      }}
+      className={cn('bg-black py-1 px-2 text-white rounded absolute z-10')}
       {...props}
     >
       {children || tooltipData.content}
@@ -113,16 +112,7 @@ const TooltipContent = ({ children, ...props }: TooltipContentProps) => {
   );
 };
 
-interface TooltipArrowProps {
-  className?: string;
-}
-
-const TooltipArrow = ({ className }: TooltipArrowProps) => {
-  return null;
-};
-
 const Tooltip = {
-  Arrow: TooltipArrow,
   Content: TooltipContent,
   Portal: TooltipPortal,
   Provider: TooltipProvider,
