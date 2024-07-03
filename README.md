@@ -25,3 +25,7 @@
 ### TextBox
 
 - [소스 코드](https://github.com/shinwonse/headless-ui/tree/main/src/components/text-box)
+
+### LineClamp
+
+- [소스 코드](https://github.com/shinwonse/headless-ui/tree/main/src/components/line-clamp)
