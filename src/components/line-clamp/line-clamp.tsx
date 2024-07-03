@@ -25,20 +25,31 @@ const LineClamp = ({ className, lines, text }: LineClampProps) => {
   }, [lines]);
 
   return (
-    <div className={cn('leading-4 line-clamp-2', className, isClamped && '')}>
-      <div className={cn('hidden')} ref={cloneRef}>
-        {text}
-      </div>
+    <div
+      className={cn(
+        'relative m-2.5 p-2.5 border border-gray-300 leading-relaxed',
+        isClamped ? 'overflow-hidden text-ellipsis' : '',
+        className,
+      )}
+    >
       <div
-        ref={elemRef}
-        className={cn('whitespace-pre-line')}
-        style={{ WebkitLineClamp: lines }}
+        className={cn(
+          'absolute box-border left-2.5 top-2.5 whitespace-pre-line invisible opacity-0 z-[-1]',
+        )}
+        ref={cloneRef}
       >
         {text}
       </div>
-      {isClamped && (
-        <button onClick={() => toggleClamped(false)}>Read more</button>
-      )}
+      <div
+        className={cn(
+          'whitespace-pre-line',
+          isClamped && `line-clamp-${lines}`,
+        )}
+        ref={elemRef}
+      >
+        {text}
+      </div>
+      {isClamped && <button onClick={() => toggleClamped(false)}>more</button>}
     </div>
   );
 };
